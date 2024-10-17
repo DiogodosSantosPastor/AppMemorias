@@ -65,10 +65,10 @@ const styles = StyleSheet.create({
   titulo: {
     fontWeight: 'bold',
     fontSize: 18,
-    color: '#FFFFFF',
+    color: '#000000',
   },
   descricao: {
-    color: '#AAAAAA',
+    color: '#000000',
     marginBottom: 5,
   },
   image: {

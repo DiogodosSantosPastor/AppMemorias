@@ -10,32 +10,16 @@ export default function NovaMemoria() {
   const [imagem, setImagem] = useState(null);
   const router = useRouter();
 
-  const solicitarPermissao = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== 'granted') {
-      Alert.alert(
-        'Permissão Necessária',
-        'Precisamos da sua permissão para acessar as imagens do dispositivo.'
-      );
-      return false;
-    }
-    return true;
-  };
-
   const selecionarImagem = async () => {
-    const permissaoConcedida = await solicitarPermissao();
-    if (!permissaoConcedida) {
-      return;
-    }
-
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       quality: 1,
     });
 
     if (!result.canceled) {
       setImagem(result.assets[0].uri);
+    } else {
+      alert('Você não selecionou uma imagem.');
     }
   };
 
@@ -45,6 +29,7 @@ export default function NovaMemoria() {
     memorias.push(novaMemoria);
     await AsyncStorage.setItem('memorias', JSON.stringify(memorias));
     router.push('/'); 
+    onVoltar();
   };
 
   return (
